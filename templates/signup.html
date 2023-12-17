@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        form {
+            width: 60%;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 12px);
+            padding: 6px;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form action="/signup" method="post">
+        <!-- Add signup form fields -->
+        <!-- Example: Username, Email, Password -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <p class="error" id="password-error"></p>
+        
+        <input type="submit" value="Sign Up">
+    </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('password-error');
+            
+            // Password criteria: at least 8 characters with 1 capital letter and 1 number
+            const regex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+            
+            if (!regex.test(password)) {
+                passwordError.textContent = "Password must include at least 8 characters with 1 capital letter and 1 number";
+                event.preventDefault(); // Prevent form submission
+            } else {
+                passwordError.textContent = ""; // Clear error message if criteria met
+            }
+        });
+    </script>
+</body>
+</html>
